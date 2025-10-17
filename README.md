@@ -1,32 +1,27 @@
-# Airline Server Simulation
+# Airport Network Simulator (TCP)
 
-1) How to run your program? Please state your assumptions clearly.
+Simulates a hub-and-spoke airline network over **TCP sockets**. A **Scheduler** assigns routes; **Airport** nodes act as both servers and clients exchanging structured "flight" messages.
 
-    Assignemnt was tested and written with Python 3.13 in mind
-    run ```python -m src.main``` from Assignment folder
-    logs all will be created within logs folder, console also shows all flights
-    airport and route yaml required
+- **Why:** teaching tool for networks (routers/links/IXP analogy)
+- **What:** multi-node messaging, retry/backoff, structured logging, config-driven topology
+- **Outputs:** throughput (msgs/s), all routes in logs, delivery Success
 
-    Assumptions:
-    Each airport acts as both server and client
-    ANC SEA hubs else spokes
-    Small airports must go through a hub to reach elsewhere
-    One Layover Max, FAI >> ANC >> BRW
+## Quick start (60 seconds)
 
-2) Do you see parallels with systems such as Internet eXchange Points and the
-Internet traffic, and how did we simulate the traffic with a hub-and-spoke
-topology here? Explain.
+```bash
+# Tested on python 3.13.9
+python -m src.main
 
-    Airports are acting as routers, Payload as packets, flights as links
-    Hubs acting as IXP
+                 [Scheduler]
+                     |
+            +---------+---------+
+            |                   |
+[BET]---[ANC]---[SEA]      [SEA]---[JNU]
+            |                   | 
+        [FAI]              [FAI]
 
-3) Please state your assumptions and your thoughts inspired by this exercise in
-the context of Computer Networks.
-
-    Each message contains metadata and payload like IP packet header and data.
-    Hubs read header to determine whether to forward or "deliver locally"
-    Using TCP is more reliable but, less scalable. UDP would be faster but less reliable.
-    A thought of mine is that reading documentation and seeing that something will be deprecated in the following version is terrible. (Thread related stuff)
+{ "src":"ANC", "dst":"SEA", "payload":"Passenger Name" or "Cargo" }
+ ```
 
 ###### first/last-name JSONs sourced from: 
 https://github.com/terryweiss/ink-collector/tree/master/tests/nottests
