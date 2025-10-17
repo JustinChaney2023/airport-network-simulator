@@ -1,4 +1,7 @@
 # Airport Network Simulator (TCP)
+![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Status](https://img.shields.io/badge/status-active-success.svg)
 
 Simulates a hub-and-spoke airline network over **TCP sockets**. A **Scheduler** assigns routes; **Airport** nodes act as both servers and clients exchanging structured "flight" messages.
 
