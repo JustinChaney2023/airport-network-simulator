@@ -26,5 +26,13 @@ python -m src.main
 { "src":"ANC", "dst":"SEA", "payload":"Passenger Name" or "Cargo" }
  ```
 
+## Architecture Overview
+
+- **Scheduler**: central controller that reads a YAML topology and randomly dispatches flight messages.
+- **Airport Node**: acts as both TCP server and client; handles incoming connections, forwards messages based on routing table, logs arrivals.
+- **Message Schema**: JSON or YAML packets with `src`, `dst`, `payload`, and optional `ttl` + `ts` timestamps.
+- **Config File**: defines airports, routes, and scheduler frequency (flights/minute).
+- **Logging**: structured text logs of all deliveries; aggregated by scheduler for throughput metrics.
+
 ###### first/last-name JSONs sourced from: 
 https://github.com/terryweiss/ink-collector/tree/master/tests/nottests
